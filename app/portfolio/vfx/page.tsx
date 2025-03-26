@@ -23,7 +23,7 @@ const vfxProjects: Array<{
     category: 'VFX Layout',
     description: 'Production layout work showcasing CG cinematic cameras, retiming, reracking, proxy creation, crowd placements, ingestions, and more.',
 
-    imagePath: '/logos/Production-Layout.jpg',
+    imagePath: '/thumbnail/Production-Layout.jpg',
 
     videoUrl: 'https://vimeo.com/1060745371',
     videoType: 'vimeo',
@@ -35,7 +35,7 @@ const vfxProjects: Array<{
     category: 'Cinematic Camera',
     description: 'Cinematic camera, stitched camera, and multiple projection work demonstrating dynamic framing, movement, and visual storytelling techniques.',
 
-    imagePath: '/logos/Cinematic-Camera.jpg',
+    imagePath: '/thumbnail/Cinematic-Camera.jpg',
 
     videoUrl: 'https://vimeo.com/1062331587/1a0097ad99',
     videoType: 'vimeo',
@@ -47,7 +47,7 @@ const vfxProjects: Array<{
     category: 'Previz',
     description: 'Comprehensive previsualization work showcasing complex sequence planning, technical visualization, and creative problem-solving for production.',
 
-    imagePath: '/logos/Previz-Layout.jpg',
+    imagePath: '/thumbnail/Previz-Layout.jpg',
 
     videoUrl: 'https://vimeo.com/1062328741/dd9829b4a8',
     videoType: 'vimeo',
@@ -59,7 +59,7 @@ const vfxProjects: Array<{
     category: 'Camera & Body Tracking',
     description: 'High-precision camera and body tracking demonstrations for seamless VFX integration with live-action footage.',
 
-    imagePath: '/logos/camera-bodytrack.jpg',
+    imagePath: '/thumbnail/camera-bodytrack.jpg',
 
     videoUrl: 'https://youtu.be/Vqj1RU_uJCk',
     videoType: 'youtube',
@@ -196,8 +196,8 @@ export default function VFXPortfolio() {
                   className="object-cover transition-all duration-300 group-hover:scale-105 image-fade-in"
                   priority={project.id <= 2}
                   loading={project.id <= 2 ? "eager" : "lazy"}
-                  quality={85}
-                  unoptimized={true}
+                  quality={75}
+                  unoptimized={false}
                   onLoad={(e) => {
                     const img = e.target as HTMLImageElement;
                     if (img.complete) {
@@ -216,7 +216,7 @@ export default function VFXPortfolio() {
                   onError={(e) => {
                     console.log(`Failed to load image: ${project.imagePath}`);
                     const imgElement = e.currentTarget;
-                    imgElement.src = '/placeholder-image.jpg';
+                    imgElement.src = 'D:\Website\zaheerbijapure\public\thumbnail';
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">

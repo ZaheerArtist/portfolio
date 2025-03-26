@@ -30,21 +30,21 @@ const aiImageGallery = [
     id: 1,
     title: 'Johnson\'s Baby Poster Design 1',
     description: 'AI-generated poster design for Johnson\'s Baby products showcasing the gentle care and nurturing elements essential for infant skincare. Created with attention to soft colors and calming visuals.',
-    imagePath: '/zaheerbijapure/images/ai/johnsons-baby-poster1.png',
+    imagePath: '/ai-gallery/johnsons-baby-poster1.png',
     tool: 'Freepik AI + Adobe Photoshop'
   },
   {
     id: 2,
     title: 'Johnson\'s Baby Poster Design 2',
     description: 'Second variation of Johnson\'s Baby promotional material highlighting the brand\'s commitment to natural ingredients and baby-safe formulations, designed with a harmonious color palette and soothing imagery.',
-    imagePath: '/zaheerbijapure/images/ai/johnsons-baby-poster2.png',
+    imagePath: '/ai-gallery/johnsons-baby-poster2.png',
     tool: 'Freepik AI + Adobe Photoshop'
   },
   {
     id: 3,
     title: 'Coming Soon',
     description: 'More AI-generated imagery projects in development',
-    imagePath: '/zaheerbijapure/images/placeholder.jpg',
+    imagePath: '/ai-gallery/architecture.jpg',
     tool: 'Various AI Tools'
   }
 ];
@@ -205,6 +205,9 @@ export default function AIPortfolio() {
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                     priority={true}
+                    loading="eager"
+                    quality={75}
+                    unoptimized={false}
                     onError={(e) => {
                       // If image fails to load, display a colored placeholder with text
                       const imgElement = e.currentTarget as HTMLImageElement;
@@ -251,6 +254,9 @@ export default function AIPortfolio() {
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                     priority={true}
+                    loading="eager"
+                    quality={75}
+                    unoptimized={false}
                     onError={(e) => {
                       // If image fails to load, display a colored placeholder with text
                       const imgElement = e.currentTarget as HTMLImageElement;
@@ -339,94 +345,30 @@ export default function AIPortfolio() {
           
           {/* Projects Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project) => (
+            {filteredProjects.map((project, index) => (
               <motion.div
                 key={project.id}
-                layout
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-                className="bg-primary rounded-lg overflow-hidden group shadow-lg hover:shadow-accent2/20 transition-all duration-300"
+                whileHover={{ y: -5 }}
+                className="bg-primary rounded-lg overflow-hidden shadow-md group cursor-pointer"
+                onClick={() => handleSelectProject(project)}
               >
-                <div className="relative h-60 overflow-hidden">
-                  {/* Project image with fallback */}
-                  <div className="w-full h-full bg-secondary flex items-center justify-center">
-                    {project.imagePath ? (
-                      <Image 
-                        src={project.imagePath} 
-                        alt={project.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          if (project.videoType === 'youtube' && project.videoUrl) {
-                            const videoId = project.videoUrl.split('/').pop();
-                            if (videoId) {
-                              target.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-                              target.onerror = () => {
-                                target.src = '/placeholder-image.jpg';
-                              };
-                            } else {
-                              target.src = '/placeholder-image.jpg';
-                            }
-                          } else {
-                            target.src = '/placeholder-image.jpg';
-                          }
-                        }}
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-secondary">
-                        <span className="text-2xl text-white/50">{project.title}</span>
+                <div className="h-48 relative overflow-hidden bg-secondary">
+                  <Image
+                    src={project.imagePath}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover transition-all duration-300 group-hover:scale-105"
+                    loading={index < 2 ? "eager" : "lazy"}
+                    quality={75}
+                    unoptimized={false}
+                  />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <div className="text-white flex items-center">
+                      <div className="w-12 h-12 rounded-full bg-accent2 flex items-center justify-center">
+                        <FaPlay className="ml-1" />
                       </div>
-                    )}
-                  </div>
-                  
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <button 
-                      className="bg-accent2/90 text-white p-3 rounded-full mx-2 hover:bg-accent2 transition-colors duration-200 transform hover:scale-110"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleSelectProject(project);
-                      }}
-                      aria-label="View project details"
-                    >
-                      <FaExpand />
-                    </button>
-                    <a 
-                      href={project.videoUrl} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="bg-accent2/90 text-white p-3 rounded-full mx-2 hover:bg-accent2 transition-colors duration-200 transform hover:scale-110"
-                      aria-label="Play video"
-                    >
-                      <FaPlay />
-                    </a>
-                  </div>
-                </div>
-                
-                <div className="p-6">
-                  <div className="flex items-center mb-2">
-                    <FaTag className="text-accent2 mr-2" />
-                    <span className="text-accent2 text-sm font-medium">{project.category}</span>
-                  </div>
-                  <h3 className="text-xl font-bold mb-2 line-clamp-2">{project.title}</h3>
-                  <p className="text-textSecondary text-sm line-clamp-3 mb-3">{project.description}</p>
-                  <div className="flex justify-between items-center text-xs text-textSecondary mt-4">
-                    <div className="flex items-center">
-                      <FaCalendarAlt className="mr-1" />
-                      <span>{project.year}</span>
                     </div>
-                    <button 
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleSelectProject(project);
-                      }}
-                      className="text-accent2 hover:underline"
-                    >
-                      View Details
-                    </button>
                   </div>
                 </div>
               </motion.div>

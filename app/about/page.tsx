@@ -85,7 +85,21 @@ export default function About() {
 
   // Function to map movie titles to correct filenames
   const getMovieFilename = (title: string) => {
-    return title.replace(/[&:,.']/g, '').replace(/\s+/g, '-');
+    // Special cases mapping
+    const specialCases: Record<string, string> = {
+      "Fast & Furious: Hobbs & Shaw": "Fast and Furious Hobbs and Shaw",
+      "Fantastic Beasts: The Crimes of Grindelwald": "Fantastic Beasts The Crimes of Grindelwald",
+      "Greyhound": "Greyhound Tom Hanks",
+      "2.0": "2Point0"
+    };
+    
+    // If it's a special case, use the mapped filename
+    if (title in specialCases) {
+      return specialCases[title];
+    }
+    
+    // Default case: just return the title with basic replacements
+    return title.replace(/:/g, '').replace(/&/g, ' and ');
   };
   
   // Function to get the correct image URL for GitHub Pages
@@ -93,7 +107,7 @@ export default function About() {
     // Check if we're running in development or production
     const isDev = typeof window !== 'undefined' && window.location.hostname === 'localhost';
     // If we're in development, use relative paths, otherwise use GitHub Pages path
-    return isDev ? path : `/zaheerbijapure${path}`;
+    return isDev ? path : `public/Films${path}`;
   };
 
   const skills = [
@@ -323,20 +337,23 @@ export default function About() {
         </motion.div>
 
         {/* Profile Section */}
-        <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-8">
-          <div className="relative w-48 h-48 rounded-full overflow-hidden">
-
-                <Image 
-              src="/thumbnail/profile.jpg"
-              alt="Zaheer Bijapure"
-                  fill
-              className="object-cover"
-                  priority
-              onError={(e) => handleImageError(e, 'profile')}
-
-            />
+        <div className="flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:space-x-8 mt-[-40px]">
+          <div className="w-full flex justify-center items-center">
+            <div className="relative w-96 aspect-[3/4] rounded-lg overflow-hidden transform translate-y-[-20px]">
+              <Image 
+                src={`/zaheer-bijapure.jpg?refresh=${Date.now()}`}
+                alt="Zaheer Bijapure - VFX Layout & 3D Artist" 
+                fill
+                sizes="384px"
+                quality={100}
+                style={{ objectFit: 'cover' }}
+                className="rounded-lg"
+                priority
+                loading="eager"
+                unoptimized={true}
+              />
+            </div>
           </div>
-
 
           {/* Bio */}
           <motion.div
@@ -549,15 +566,15 @@ export default function About() {
                   <div className="thumbnail-skeleton"></div>
 
                   <Image 
-
-                    src={`/thumbnail/${getMovieFilename(project.title)}-${project.year}.jpg`}
+                    src={`/Films/${getMovieFilename(project.title)} (${project.year}).jpg`}
                     alt={`${project.title} (${project.year})`}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover transition-transform duration-300 group-hover:scale-110 image-fade-in"
                     priority={index < 4}
                     loading={index < 4 ? 'eager' : 'lazy'}
-                    quality={90}
+                    quality={75}
+                    unoptimized={false}
                     onError={(e) => handleImageError(e, project.title)}
                   />
                   {project.isRecent && (
