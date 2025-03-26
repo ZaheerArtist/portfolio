@@ -13,7 +13,7 @@ const vfxProjects = [
     title: 'Cinematic Layout for Feature Film',
     category: 'Layout',
     description: 'Camera movement and scene composition for a high-action sequence.',
-    imagePath: '/placeholder-image.jpg',
+    imagePath: 'public/thumbnail/Production-Layout.jpg',
     videoUrl: '#',
   },
   {
@@ -21,7 +21,7 @@ const vfxProjects = [
     title: '3D Environment Creation',
     category: 'Modeling',
     description: 'Detailed 3D environment design for a science fiction TV series.',
-    imagePath: '/placeholder-image.jpg',
+    imagePath: 'public/thumbnail/Production-Layout.jpg',
     videoUrl: '#',
   },
   {
@@ -29,7 +29,7 @@ const vfxProjects = [
     title: 'Character Animation Layout',
     category: 'Animation',
     description: 'Camera and character blocking for an animated feature.',
-    imagePath: '/placeholder-image.jpg',
+    imagePath: 'public/thumbnail/Production-Layout.jpg',
     videoUrl: '#',
   },
   {
@@ -37,7 +37,7 @@ const vfxProjects = [
     title: 'Visual Effects Integration',
     category: 'Compositing',
     description: 'Seamless integration of visual effects elements in live-action footage.',
-    imagePath: '/placeholder-image.jpg',
+    imagePath: 'public/thumbnail/Production-Layout.jpg',
     videoUrl: '#',
   },
   {
