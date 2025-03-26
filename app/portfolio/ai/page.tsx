@@ -44,7 +44,7 @@ const aiImageGallery = [
     id: 3,
     title: 'Coming Soon',
     description: 'More AI-generated imagery projects in development',
-    imagePath: '/ai-gallery/architecture.jpg',
+    imagePath: 'public/ai-gallery/architecture.jpg',
     tool: 'Various AI Tools'
   }
 ];

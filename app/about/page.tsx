@@ -341,7 +341,7 @@ export default function About() {
           <div className="w-full flex justify-center items-center">
             <div className="relative w-96 aspect-[3/4] rounded-lg overflow-hidden transform translate-y-[-20px]">
               <Image 
-                src={`/zaheer-bijapure.jpg?refresh=${Date.now()}`}
+                src={`public/zaheer-bijapure.jpg?refresh=${Date.now()}`}
                 alt="Zaheer Bijapure - VFX Layout & 3D Artist" 
                 fill
                 sizes="384px"
