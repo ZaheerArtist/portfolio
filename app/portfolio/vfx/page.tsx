@@ -216,7 +216,7 @@ export default function VFXPortfolio() {
                   onError={(e) => {
                     console.log(`Failed to load image: ${project.imagePath}`);
                     const imgElement = e.currentTarget;
-                    imgElement.src = 'D:\Website\zaheerbijapure\public\thumbnail';
+                    imgElement.src = 'public\thumbnail';
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
